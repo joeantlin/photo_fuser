@@ -6,25 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
     {% load static %}	
-    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
 </head>
 <body>
     <div class="wrapper">
         <header class="header">
-            <a href="/dashboard">Logo</a>
+            <a class="header__link" href="/dashboard">Logo</a>
             <div>
                 {% if request.session.id %}
-                    <a href="/profile">Profile</a>
-                    <a href="/createimage">Upload</a>
+                    <a class="header__link" href="/profile">Profile</a>
+                    <a class="header__link" href="/createimage">Upload</a>
                 {% else %}
-                    <a href="/signuplog">Sign In</a>
+                    <a class="header__link" href="/signuplog">Sign In</a>
                 {% endif %}
             </div>
         </header>
 
         <div class="main">
-            <div class="content">
+            <div class="main__content">
                 {% for photo in img %}
                     <a href="/viewimage/{{ photo.id }}"><img src="{{ photo.imagethumb.url }}" alt="{{ photo.title }}"></a>
                 {% endfor %}

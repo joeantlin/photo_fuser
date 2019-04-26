@@ -12,14 +12,14 @@
 <body>
     <div class="wrapper">
         <header class="header">
-            <a href="/dashboard">Logo</a>
+            <a class="header__link" href="/dashboard">Logo</a>
             <div>
-                <a href="/logout">Logout</a>
-                <a href="/profile">Profile</a>
+                <a class="header__link" href="/logout">Logout</a>
+                <a class="header__link" href="/profile">Profile</a>
             </div>
         </header>
 
-        <div class="main">
+        <div class="main__content">
             <div>
                 <h1>Final Step</h1>
             </div>
@@ -27,7 +27,6 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form }}
-                    <input type="hidden" name="penis" value="{{request.session.id}}">
                     <input type="submit" value="Save">
                 </form>
             </div>

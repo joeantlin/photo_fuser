@@ -23,14 +23,131 @@
             <div>
                 <h1>Let's Make Magic ;)</h1>
             </div>
+            <!-- <button onclick="myFunction()">hide</button> -->
             <div class="main__content">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Create">
-                </form>
+                <div id="result" class="result">
+                    <h2>Your artworks</h2>
+                    <div id="artwork"></div>
+                </div>
+
+                <div class="photo__create" id="photocreate">
+                    <div class="photoform">
+                        <h2>Choose picture</h2>
+                        {% comment %} <select id="qualitySelect">
+                            <option value="512">Low Quality</option>
+                            <option value="1080" selected="selected">Medium Quality</option>
+                            <option value="1980">High Quality</option>
+                        </select> {% endcomment %}
+
+                        <input id="qualitySelect" type="hidden" value="1080">
+
+                        {% comment %} <label>
+                            <input id="optimzeForPrint" type="checkbox" value="false">
+                            Optimize for print
+                        </label>
+
+                        <label>
+                            <input id="useOriginalColors" type="checkbox" value="false">
+                            Use original colors
+                        </label> {% endcomment %}
+
+                        <div id="upload">
+                            <input type="file" onchange="onFileSelected(event)">
+                        </div>
+                    </div>
+
+                    <div id="progress-wrapper">
+                        <img id="progressbar" src="{% static 'log_app/images/loading.gif' %}" alt="loading" />
+                    </div>
+                    <div id="styles">
+                        <h2>Choose art style</h2>
+                        <div id="style-list"></div>
+                    </div>
+                </div>
+
+                <div class="createit">
+                    <div id="savebutton">
+                        <h2>Are you statisfied with this image</h2>
+                        <button onclick="formAppear();buttonAppear();saveFunction()" >save</button>
+                    </div>
+                    
+                    <form id="createit" action="/createimage" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form }}
+                        <label id="photoadd"></label>
+                        <p><button>Create image</button></p> 
+                    </form>
+                </div>
+                
             </div>
+
+            
         </div>
+
+        
+        
+
     </div>
+
+    <script type="text/javascript" src="{% static 'log_app/js/client/axios.standalone.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/hmac-sha256.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/sha256.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/hmac.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/enc-base64.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/url-template.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/sigV4Client.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/apiGatewayClient.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/simpleHttpClient.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/utils.js' %}"></script>
+    <script type="text/javascript" src="{% static 'log_app/js/client/apigClient.js' %}"></script>
+
+
+    <!-- JQuery lib -->
+    <script src="{% static 'log_app/js/jquery.js' %}"></script> 
+
+    <!-- Fancybox for artwork preview -->
+    <!-- <script src="{% static 'log_app/js/fancybox.js' %}"></script> -->
+
+    <!-- Image tools -->
+    <script src="{% static 'log_app/js/imageTools.js' %}"></script>
+
+    <!-- Site script-->
+    <script src="{% static 'log_app/js/scripts.js' %}"></script>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("photocreate");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function formAppear() {
+            var x = document.getElementById("createit");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+
+        function buttonAppear() {
+            var x = document.getElementById("savebutton");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function saveFunction() {
+            var x = document.getElementById("saveme").getAttribute("src");
+            var t = '<input type="hidden" value='+x+' name="image">'
+            document.getElementById("photoadd").innerHTML = t
+        }
+
+</script>
 </body>
 </html>

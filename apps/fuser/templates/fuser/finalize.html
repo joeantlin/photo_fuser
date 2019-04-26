@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Final</title>
     {% load static %}	
-    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/styles.css' %}">
 </head>
 <body>
     <div class="wrapper">
@@ -27,6 +26,7 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form }}
+                    <input type="hidden" name="image" value="https://www.deeparteffects.com/images/generated/c838940e-fbf6-43de-947c-88459b5e5489.jpg">
                     <input type="submit" value="Save">
                 </form>
             </div>

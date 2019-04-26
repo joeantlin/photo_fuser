@@ -4,9 +4,12 @@ from django.contrib import messages
 from .models import Photo, Comment, User
 from .forms import UploadPhoto, CombinePhoto
 from PIL import Image
+import numpy as np
+from io import BytesIO
+import urllib
+import cv2
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def index(request):
     return redirect('/dashboard')
@@ -39,7 +42,7 @@ def viewimage(request, id):
         uid = User.objects.get(id=pid)
         meid = Photo.objects.get(id=mid)
         postcom = Comment.objects.create(comment=com, user=uid, photo=meid)
-        return redirect("/wall")
+        return redirect("/viewimage/"+id)
     context = {
         "img": Photo.objects.filter(id=id),
         "all_comments": Comment.objects.filter(photo=id),
@@ -52,44 +55,31 @@ def createimage(request):
     if "id" not in request.session:
         messages.error(request, 'You must be logged in to access that information') 
         return redirect("/signuplog")
-    form = UploadPhoto()
-    if request.method == "POST":
-        form = UploadPhoto(request.POST or None, request.FILES or None)
-        if form.is_valid():
-            print("Valid form")
-            clean = form.cleaned_data
-            photo1 = clean["photo1"]
-            photo2 = clean["photo2"]
-        else:
-            print("Invalid form")
-    context = {
-        'form': form,
-    }
-    return render(request, "fuser/fuser.html", context)
-
-def finalize(request):
-    if "id" not in request.session:
-        messages.error(request, 'You must be logged in to access that information') 
-        return redirect("/signuplog")
     form = CombinePhoto()
     if request.method == "POST":
         user = User.objects.get(id=request.session["id"])
         form = CombinePhoto(request.POST or None, request.FILES or None)
         if form.is_valid():
+            print(form)
             print("Valid form")
             clean = form.cleaned_data
-            newimage = clean["image"]
-            newphoto = Photo.objects.create(**form.cleaned_data, imagethumb=newimage, creator=user)
-            thumbroot = settings.MEDIA_ROOT_THUMB
-            directory = os.listdir(thumbroot)
-            print(directory)
-            for p in directory:
-                if p.endswith(".png"):
-                    print("foundme")
-                    path = os.path.join(thumbroot, p)
-                    i = Image.open(path)
-                    i.thumbnail((300,300))
-                    i.save(path)#settings.MEDIA_ROOT + '/new' + p
+            # img_url = clean["image"]
+            newimg = request.POST["image"]
+            # newimg = urllib.request.urlopen(newimage)
+            # response = request.GET(newimage)
+            # newimg = Image.open(BytesIO(response.content))
+            # print(newimg)
+            newphoto = Photo.objects.create(**form.cleaned_data, image=newimg, imagethumb=newimg, creator=user)
+            # thumbroot = settings.MEDIA_ROOT_THUMB
+            # directory = os.listdir(thumbroot)
+            # print(directory)
+            # for p in directory:
+            #     if p.endswith(".jpg"):
+            #         print("foundme")
+            #         path = os.path.join(thumbroot, p)
+            #         i = Image.open(path)
+            #         i.thumbnail((300,300))
+            #         i.save(path)#settings.MEDIA_ROOT + '/new' + p
             return redirect ("/profile")
         else:
             print("Invalid form")
@@ -97,7 +87,41 @@ def finalize(request):
     context = {
         'form': form,
     }
-    return render(request, "fuser/finalize.html", context)
+    return render(request, "fuser/fuser.html", context)
+
+def finalize(request):
+#     if "id" not in request.session:
+#         messages.error(request, 'You must be logged in to access that information') 
+#         return redirect("/signuplog")
+#     form = CombinePhoto()
+#     if request.method == "POST":
+#         user = User.objects.get(id=request.session["id"])
+#         form = CombinePhoto(request.POST or None, request.FILES or None)
+#         if form.is_valid():
+#             print("Valid form")
+#             clean = form.cleaned_data
+#             # newimage = clean["image"]
+#             img_url = request.POST["image"]
+#             newimg = urllib.urlopen(img_url)
+#             newphoto = Photo.objects.create(**form.cleaned_data, image=newimage, imagethumb=newimage, creator=user)
+#             thumbroot = settings.MEDIA_ROOT_THUMB
+#             directory = os.listdir(thumbroot)
+#             print(directory)
+#             for p in directory:
+#                 if p.endswith(".jpg"):
+#                     print("foundme")
+#                     path = os.path.join(thumbroot, p)
+#                     i = Image.open(path)
+#                     i.thumbnail((300,300))
+#                     i.save(path)#settings.MEDIA_ROOT + '/new' + p
+#             return redirect ("/profile")
+#         else:
+#             print("Invalid form")
+#             #return redirect("/profile")
+#     context = {
+#         'form': form,
+#     }
+    return render(request, "fuser/finalize.html")
 
 def delete(request, type, deleteid):
     delete =int(deleteid)

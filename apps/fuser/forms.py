@@ -11,7 +11,6 @@ class UploadPhoto(forms.Form):
     photo2 = forms.ImageField()
 
 class CombinePhoto(forms.Form):
-    image       = forms.ImageField()
     title       = forms.CharField()
     description = forms.CharField(
                         required    = False,
@@ -22,7 +21,6 @@ class CombinePhoto(forms.Form):
                             }
                         )
                     )
-    image       = forms.ImageField()
     # creator     = forms.ModelChoiceField(
     #                     queryset=User.objects.all(),
     #                     widget  = forms.TextInput(

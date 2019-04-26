@@ -26,7 +26,7 @@
         <div class="main">
             <div class="main__content">
                 {% for photo in img %}
-                    <a href="/viewimage/{{ photo.id }}"><img src="{{ photo.imagethumb.url }}" alt="{{ photo.title }}"></a>
+                    <a href="/viewimage/{{ photo.id }}"><img src="{{ photo.imagethumb }}" alt="{{ photo.title }}"></a>
                 {% endfor %}
             </div>
         </div>

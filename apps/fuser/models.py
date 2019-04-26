@@ -10,6 +10,7 @@ class Photo(models.Model):
     creator     = models.ForeignKey(User, related_name="photo", null=True, on_delete=models.SET_NULL)
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now=True)
+    
 
 class Comment(models.Model):
     comment     = models.TextField()

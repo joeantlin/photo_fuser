@@ -28,7 +28,7 @@
                 {% if img %}
                     {% for photo in img %}
                         <div class="main__title"><h2>{{ photo.title }}</h2></div> 
-                        <img src="{{ photo.image.url }}" alt="{{ photo.alt.url }}">
+                        <img src="{{ photo.image }}" alt="{{ photo.alt }}">
                         <div class="main__description">
                             <p class="bold">{{ photo.creator.first_name}} {{ photo.creator.last_name}}</p>
                             <p>{{ photo.description }}</p>

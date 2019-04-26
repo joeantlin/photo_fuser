@@ -10,11 +10,9 @@ html {
   width: 100%;
   margin: auto; }
 
-.bold {
-  font-weight: bold; }
-
 body {
-  font-family: Helvetica, Arial, sans-serif; }
+  font-family: Helvetica, Arial, sans-serif;
+  color: #111; }
 
 p {
   font-size: 1.5rem; }
@@ -53,6 +51,10 @@ a {
 .main {
   box-sizing: border-box;
   margin: auto; }
+  .main h1 {
+    font-size: 3rem;
+    text-align: center;
+    padding: 1rem; }
   .main .main__content {
     box-sizing: border-box;
     padding: 1rem; }
@@ -89,6 +91,92 @@ a {
       .main .main__content .main__comment form button {
         color: #66c1df;
         padding: 1rem; }
+    .main .main__content .photo__create {
+      text-align: center; }
+      .main .main__content .photo__create h2 {
+        font-size: 2rem;
+        color: #333333;
+        margin: 2rem auto; }
+      .main .main__content .photo__create .photoform {
+        width: 500px;
+        margin: auto; }
+      .main .main__content .photo__create .styles {
+        margin: auto;
+        display: block; }
+    .main .main__content .result {
+      width: 500px;
+      margin: auto; }
+      .main .main__content .result h2 {
+        font-size: 2rem;
+        color: #333333;
+        margin: 2rem auto; }
+    .main .main__content .createit {
+      display: block;
+      width: 500px;
+      margin: auto; }
+      .main .main__content .createit h2 {
+        text-align: center;
+        margin: 1rem;
+        font-size: 2rem; }
+      .main .main__content .createit button, .main .main__content .createit a[class=button] {
+        background-color: white;
+        color: #27afe6;
+        font-size: 15px;
+        border: solid 0.1rem #27afe6;
+        width: 100%;
+        height: 50px;
+        display: block; }
+      .main .main__content .createit form {
+        width: 300px;
+        display: none;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.5rem;
+        padding: 20px;
+        border-radius: 10px;
+        box-sizing: border-box; }
+        .main .main__content .createit form label {
+          display: block;
+          font-weight: normal;
+          padding-bottom: 5px;
+          padding-top: 0px; }
+        .main .main__content .createit form input, .main .main__content .createit form select, .main .main__content .createit form button, .main .main__content .createit form a[class=button], .main .main__content .createit form textarea {
+          display: block;
+          width: 100%;
+          height: 40px;
+          margin: 10px auto 5px auto;
+          padding-right: 10px;
+          padding-left: 10px;
+          border-radius: 5px;
+          box-sizing: border-box;
+          border: #27afe6 solid 0.1rem; }
+        .main .main__content .createit form input[type=submit] {
+          background-color: #27afe6;
+          color: white;
+          font-size: 15px;
+          border-radius: 10px;
+          width: 150px; }
+        .main .main__content .createit form button, .main .main__content .createit form a[class=button] {
+          background-color: white;
+          color: #27afe6;
+          font-size: 15px;
+          border: solid 0.1rem #27afe6;
+          width: 100%; }
+    .main .main__content .style {
+      width: 125px;
+      height: 125px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      margin: 8px;
+      border: 1px solid #333333; }
+    .main .main__content #selectable {
+      list-style-type: none;
+      list-style: none; }
+      .main .main__content #selectable li {
+        display: inline; }
+      .main .main__content #selectable div {
+        float: left; }
     .main .main__content img {
       width: 100%; }
     .main .main__content a {

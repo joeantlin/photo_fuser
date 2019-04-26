@@ -21,12 +21,12 @@
 
         <div class="main">
             <div>
-                <h1>My Images</h1>
+                <h1>{{ request.session.name}}'s Beautiful Creations</h1>
             </div>
             <div class="main__content">
                 {% if img %}
                     {% for photo in img %}
-                    <a href="/viewimage/{{ photo.id }}"><img src="{{ photo.imagethumb.url }}" alt="{{ photo.title }}"></a>
+                    <a href="/viewimage/{{ photo.id }}"><img src="{{ photo.imagethumb }}" alt="{{ photo.title }}"></a>
                     {% endfor %}
                 {% else %}
                     <p>You have not created anything yet</p>

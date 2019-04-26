@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    {% load static %}	
+    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <a href="/dashboard">Logo</a>
+            <div>
+                {% if request.session.id %}
+                    <a href="/profile">Profile</a>
+                    <a href="/dashboard">Upload</a>
+                {% else %}
+                    <a href="/signuplog">Sign In</a>
+                {% endif %}
+            </div>
+        </header>
+
+        <div class="main">
+            <div class="content">
+                {% if img %}
+                    {% for photo in img %}
+                        <h2>{{ photo.title }}</h2>
+                        <article>
+                            <img src="{{ photo.image.url }}" alt="{{ photo.alt.url }}">
+                            <p>{{ photo.description }}</p>
+                        </article>
+
+                        <div class="comments">
+                        {% for comment in all_comments %}
+                            <p><b>{{ comment.user.first_name }} {{ comment.user.last_name }} - <i>{{ comment.created_at }}</i></b></p>
+                            <p>{{ comment.comment }}</p>
+                            {% if comment.user.id == request.session.id %}
+                                <a href="/delete/comment/{{ comment.id }}">delete</a>
+                            {% endif %}
+                        {% endfor %}
+                            <form class="mpost" action="/viewimage/{{ photo.id }}" method="post">
+                                {% csrf_token %}
+                                <label>
+                                    Post a comment
+                                    <textarea name="comment"></textarea>
+                                    <input type="hidden" name="userid" value="{{ request.session.id }}">
+                                    <input type="hidden" name="photoid" value="{{ photo.id }}">
+                                    <input type="submit" value="Comment">
+                                </label>
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>This image does not exist.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

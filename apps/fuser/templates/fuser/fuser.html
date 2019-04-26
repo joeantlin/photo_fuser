@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fuser</title>
+    {% load static %}	
+    <link rel="stylesheet" href="{% static 'log_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'log_app/css/core_styles.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <a href="/dashboard">Logo</a>
+            <div>
+                <a href="/logout">Logout</a>
+                <a href="/profile">Profile</a>
+            </div>
+        </header>
+
+        <div class="main">
+            <div>
+                <h1>Let's Make Magic ;)</h1>
+            </div>
+            <div class="content">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Create">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

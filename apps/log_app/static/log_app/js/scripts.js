@@ -7,9 +7,9 @@ var maxImageSize;
 console.log("HIHIHIHIHIHIHIHI")
 
 var deepArtEffectsClient = apigClientFactory.newClient({
-	apiKey: '6ZTUHl049F2i4D2D185dGxQu8UuuNzB43KlY5ME1',
-    accessKey: 'AKIA3XE3HF7SVAHC7YX6',
-    secretKey: '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'
+	apiKey: 'ZIWY5lB0fsaHYbZIDUjPswyGoY11dqn2CuPdKGy2',
+    accessKey: 'AKIA3XE3HF7S5VWGTC6Y',
+    secretKey: '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'
 });
 
 $(document).ready(function(){

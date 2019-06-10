@@ -17,8 +17,8 @@ class UserManager(models.Manager):
             errors["email2"] = "That email has already been taken"
         if not postData['pass'] == postData['pwc']:
             errors["pwc"] = "Your passwords do not match"
-        elif len(postData['pass']) < 8:
-            errors["pass"] = "Password should be at least 8 characters"
+        elif len(postData['pass']) < 5:
+            errors["pass"] = "Password should be at least 5 characters"
         return errors
 
     def log_validator(self, postData):

@@ -123,13 +123,13 @@ def finalize(request):
 #     }
     return render(request, "fuser/finalize.html")
 
-def delete(request, type, deleteid):
+def delete(request, type, deleteid, imageid):
     delete =int(deleteid)
     if type == "comment":
             com = Comment.objects.get(id=delete)
             if request.session["id"] == com.user.id:
                 Comment.objects.get(id=delete).delete()
-                return redirect("/viewimage/"+ deleteid)
+                return redirect("/viewimage/"+ imageid)
             else:
                 messages.error(request, 'That does not belong to you!')
                 return redirect("/signuplog")

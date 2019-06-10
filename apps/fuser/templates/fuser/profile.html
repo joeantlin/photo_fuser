@@ -12,7 +12,9 @@
 <body>
     <div class="wrapper">
         <header class="header">
-            <a class="header__link" href="/dashboard">Logo</a>
+            <a class="header__link" href="/dashboard">
+                <img src="{% static 'log_app/images/photofuser.png' %}" alt="Photo Fuser Logo">
+            </a>
             <div>
                 <a class="header__link" href="/logout">Logout</a>
                 <a class="header__link" href="/createimage">Upload</a>
@@ -26,7 +28,11 @@
             <div class="main__content">
                 {% if img %}
                     {% for photo in img %}
-                    <a href="/viewimage/{{ photo.id }}"><img src="{{ photo.imagethumb }}" alt="{{ photo.title }}"></a>
+                        <div class="feed">
+                            <a href="/viewimage/{{ photo.id }}">
+                                <img src="{{ photo.imagethumb }}" alt="{{ photo.title }}">
+                            </a>
+                        </div>
                     {% endfor %}
                 {% else %}
                     <p>You have not created anything yet</p>

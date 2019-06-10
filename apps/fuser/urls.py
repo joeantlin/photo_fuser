@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^viewimage/(?P<id>\d+)$', views.viewimage),
     url(r'^createimage$', views.createimage),
     url(r'^finalize$', views.finalize),
-    url(r'^delete/(?P<type>\w+)/(?P<deleteid>\d+)$', views.delete),
+    url(r'^delete/(?P<type>\w+)/(?P<deleteid>\d+)/(?P<imageid>\d+)$', views.delete),
 ]
 
 # if settings.DEBUG:

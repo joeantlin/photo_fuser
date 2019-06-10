@@ -12,7 +12,9 @@
 <body>
     <div class="wrapper">
         <header class="header">
-            <a class="header__link" href="/dashboard">Logo</a>
+            <a class="header__link" href="/dashboard">
+                <img src="{% static 'log_app/images/photofuser.png' %}" alt="Photo Fuser Logo">
+            </a>
             <div>
                 {% if request.session.id %}
                     <a class="header__link" href="/profile">Profile</a>
@@ -30,19 +32,23 @@
                         <div class="main__title"><h2>{{ photo.title }}</h2></div> 
                         <img src="{{ photo.image }}" alt="{{ photo.alt }}">
                         <div class="main__description">
-                            <p class="bold">{{ photo.creator.first_name}} {{ photo.creator.last_name}}</p>
+                            <p class="bold">{{ photo.creator.first_name }} {{ photo.creator.last_name}}</p>
                             <p>{{ photo.description }}</p>
                             <p class="date">{{ photo.created_at.date }}</p>
                         </div>
 
                         <div class="main__comment">
                         {% for comment in all_comments %}
-                            <p><b>{{ comment.user.first_name }} {{ comment.user.last_name }} - <i>{{ comment.created_at }}</i></b></p>
+                            <div>
+                            <p class="bold">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
                             <p>{{ comment.comment }}</p>
+                            <p class="date">{{ comment.created_at }}
                             {% if comment.user.id == request.session.id %}
-                                <a href="/delete/comment/{{ comment.id }}">delete</a>
+                                <a href="/delete/comment/{{ comment.id }}/{{ photo.id }}">delete</a>
                             {% endif %}
+                            </p></div>
                         {% endfor %}
+                            
                             <form action="/viewimage/{{ photo.id }}" method="post">
                                 {% csrf_token %}
                                 <textarea name="comment" placeholder="Leave a comment"></textarea>
